@@ -1,4 +1,4 @@
-# Cryptocurrenct ML Project
+# Cryptocurrency ML Project
 
 ---
 
@@ -8,8 +8,8 @@ Aim of the project is to combine multiple sources of data in order to prepare op
 ---
 
 ## Data sources
-- Binance - cryptocurrency quotations and trade execution
-- Fear and Greed index - additional indicator for further market sentiment analysis
+- https://alternative.me/crypto/api/ - Tickers and price quotations
+- https://alternative.me/crypto/fear-and-greed-index/ - Fear and Greed index as market sentiment barometer
 
 ---
 
