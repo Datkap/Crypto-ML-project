@@ -4,7 +4,7 @@ import pandas as pd
 
 def get_crypto(crypto_amount: int, fiat_currency: str):
     """Collects the data about details and current quotation of given amount of cryptocurrencies compared to given
-    fiat currency. """
+    fiat currency."""
     quotation_url = f"https://api.alternative.me/v2/ticker/?limit={crypto_amount}&?convert={fiat_currency}"
 
     quotation_conn = r.get(quotation_url).json()['data']
@@ -36,9 +36,24 @@ def get_fear_and_greed():
 
 def combine_quotes_and_f_n_g(quotes, f_n_g):
     """Combines data of cryptocurrency collected by get_crypto function with Fear and Greed Index data collected with
-    get_fear_and_greed. """
-    quotes_df = quotes
-    quotes_df['fear_and_greed_score'] = f_n_g['value'][0]
-    quotes_df['fear_and_greed_classification'] = f_n_g['value_classification'][0]
+    get_fear_and_greed."""
+    quotes['fear_and_greed_score'] = f_n_g['value'][0]
+    quotes['fear_and_greed_classification'] = f_n_g['value_classification'][0]
 
-    return quotes_df
+    return quotes
+
+
+def split_cryptos(crypto_quotes, crypto_dict: dict):
+    """Splits DataFrame created by combine_quotes_and_f_n_g into separate DataFrames based on cryptocurrency indexes.
+    If index present in given dict then Series is appended. If index not present in given dict, new position is
+    created."""
+    for index in crypto_quotes.index:
+        if index in crypto_dict.keys():
+            crypto_dict[index] = crypto_dict[index].append(pd.DataFrmae(crypto_quotes.loc[index]))
+        else:
+            crypto_dict[index] = pd.DataFrame(crypto_quotes.loc[index])
+
+    pass  # Testing of function required. Initially it correctly returned Series object. DataFrame object required.
+
+# current dict shape: {1: BTC_series}
+# final dict shape: {1:{'name': 'BTC', data: BTC_df}}
