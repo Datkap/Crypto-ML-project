@@ -1,5 +1,6 @@
 import requests as r
 import pandas as pd
+import os
 
 
 def get_crypto(crypto_amount: int, fiat_currency: str):
@@ -19,8 +20,6 @@ def get_crypto(crypto_amount: int, fiat_currency: str):
         crypto_df = pd.DataFrame.from_dict([crypto])
         cryptocurrency_full_df = cryptocurrency_full_df.append(crypto_df, ignore_index=True)
 
-    cryptocurrency_full_df.set_index('id', inplace=True)
-
     return cryptocurrency_full_df
 
 
@@ -34,26 +33,28 @@ def get_fear_and_greed():
     return fear_and_greed_val
 
 
-def combine_quotes_and_f_n_g(quotes, f_n_g):
+def combine_quotes_and_fng(quotes, fng):
     """Combines data of cryptocurrency collected by get_crypto function with Fear and Greed Index data collected with
     get_fear_and_greed."""
-    quotes['fear_and_greed_score'] = f_n_g['value'][0]
-    quotes['fear_and_greed_classification'] = f_n_g['value_classification'][0]
+    quotes['fear_and_greed_score'] = fng['value'][0]
+    quotes['fear_and_greed_classification'] = fng['value_classification'][0]
 
     return quotes
 
 
-def split_cryptos(crypto_quotes, crypto_dict: dict):
-    """Splits DataFrame created by combine_quotes_and_f_n_g into separate DataFrames based on cryptocurrency indexes.
-    If index present in given dict then Series is appended. If index not present in given dict, new position is
-    created."""
-    for index in crypto_quotes.index:
-        if index in crypto_dict.keys():
-            crypto_dict[index] = crypto_dict[index].append(pd.DataFrmae(crypto_quotes.loc[index]))
+def save_data(quotes, path='Quotes'):
+    """Splits data collected with combine_quotes_and_fng into separate cryptos and saves them in desired destination
+    as csv files. """
+    if not os.path.exists(path):
+        os.mkdir(path)
+
+    for crypto_id in quotes['id']:
+        full_path = path + f"/{crypto_id}_{quotes['name'].loc[quotes['id'] == crypto_id].iloc[0]}".replace(" ", "_") + \
+                    ".csv"
+        if os.path.exists(full_path):
+            current_df = pd.read_csv(full_path)
+            updated_df = current_df.append(quotes.loc[quotes['id'] == crypto_id], ignore_index=True)
+            updated_df.to_csv(full_path, index=False)
         else:
-            crypto_dict[index] = pd.DataFrame(crypto_quotes.loc[index])
-
-    pass  # Testing of function required. Initially it correctly returned Series object. DataFrame object required.
-
-# current dict shape: {1: BTC_series}
-# final dict shape: {1:{'name': 'BTC', data: BTC_df}}
+            new_df = quotes.loc[quotes['id'] == crypto_id]
+            new_df.to_csv(full_path, index=False)

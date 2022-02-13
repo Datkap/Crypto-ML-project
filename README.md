@@ -16,6 +16,7 @@ Aim of the project is to combine multiple sources of data in order to prepare op
 ## Project plan
 1) Planning and description
 2) API connection with data sources
-3) Machine Learning model selection
-4) ML model learning
-5) Evaluation and further improvements
+3) Data collection
+4) Machine Learning model selection
+5) ML model learning
+6) Evaluation and further improvements
