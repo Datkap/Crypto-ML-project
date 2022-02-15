@@ -1,0 +1,2 @@
+id,name,symbol,website_slug,rank,circulating_supply,total_supply,max_supply,last_updated,price,volume_24h,market_cap,percentage_change_1h,percentage_change_24h,percentage_change_7d,percent_change_1h,percent_change_24h,percent_change_7d,fear_and_greed_score,fear_and_greed_classification
+1,Bitcoin,BTC,bitcoin,1,18958643,18958643,21000000,1644911589,43761.0,19116970134,829505082760,0.250209780420876,3.39962276928957,-0.342128215423054,0.250209780420876,3.39962276928957,-0.342128215423054,46,Fear

@@ -1,0 +1,2 @@
+id,name,symbol,website_slug,rank,circulating_supply,total_supply,max_supply,last_updated,price,volume_24h,market_cap,percentage_change_1h,percentage_change_24h,percentage_change_7d,percent_change_1h,percent_change_24h,percent_change_7d,fear_and_greed_score,fear_and_greed_classification
+52,XRP,XRP,ripple,6,47832461678,47832461678,100000000000,1644911592,0.828769,3185245571,39638368031,0.717917203318525,4.09202030048597,-0.153115661923311,0.717917203318525,4.09202030048597,-0.153115661923311,46,Fear

@@ -1,0 +1,2 @@
+id,name,symbol,website_slug,rank,circulating_supply,total_supply,max_supply,last_updated,price,volume_24h,market_cap,percentage_change_1h,percentage_change_24h,percentage_change_7d,percent_change_1h,percent_change_24h,percent_change_7d,fear_and_greed_score,fear_and_greed_classification
+1027,Ethereum,ETH,ethereum,2,119587776,119587776,0,1644911590,3052.5,13192411780,364866195013,0.618231115953108,6.05401042366625,-3.09372759218633,0.618231115953108,6.05401042366625,-3.09372759218633,46,Fear
